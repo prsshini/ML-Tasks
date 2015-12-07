@@ -1,41 +1,3 @@
-# Let me give the following home works for this week.
-# 
-# 1. Write an R function
-# 
-# measures <- function(truth, score, threshold){
-#   ...
-#   return (list(accuracy, precision, recall))
-# }
-# 
-# that takes a truth vector (1 or 0 values), score (positive class probabilities) and a threshold value, and returns the following measures: accuracy, precision and recall.
-# 
-# 2. Take your solution of spam dataset using rpart and make it give probabilities as output using 
-# probs <- predict(fit, val, type = "prob") 
-# 
-# 3. Extract out only the positive class probabilities from the ?preabove call to rpart's predict and give it to the "measures" function to get all three measures.
-# 
-# 4. Vary threshold 1 -> 0 in steps of 0.01 and get a table of the three measures for different threshold values.
-# 
-
-# More specifically,
-# 
-# precision = total number of true positive examples with scores above threshold / total number of examples with scores above threshold
-# 
-# recall = total number of true positive examples with scores above threshold / total number of positive examples
-# 
-
-# Appa
-
-
-
-# Homework 4:
-# Consider the spam dataset in
-# http://archive.ics.uci.edu/ml/machine-learning-databases/spambase/spambase.data
-# Since the data file does not have column names, I am giving the commands for reading and setting the
-# column names. Make sure you study the syntax of these. The last column (spam) is the target variable.
-# Divide the given set randomly (in a stratified way) into 3 parts (use a 50-25-25% split) to form
-# train, val and test sets. Use the train and val sets to design a pruned decision tree and then check 
-# on the test set to see how much accuracy you got on the test set.
 
 rm (list=ls())
 
@@ -44,8 +6,12 @@ library(rpart)
 library(rattle)
 library(rpart.plot)
 library(RColorBrewer)
-setwd("C:/R Learning/Titanic")
-source("programs/myfunctions.R")
+
+# The EvalFit function Measures  Best accuracy and GetBest function measures Best CP for the rpart.
+source("Evalfit_GetBest_functions.R")
+
+# The Spam Measures.R Function measures the truth,threshold and score values.
+source("spam_measures.R")
 
 
 spamD <- read.csv('http://archive.ics.uci.edu/ml/machine-learning-databases/spambase/spambase.data',sep=',',header=F)
@@ -75,6 +41,7 @@ spamCols <- c(
 )
 colnames(spamD) <- spamCols
 
+# Divide the Data Set using stratified partitioning method as train and validation set.
 spam0 <- subset(spamD,spamD$targetvar==0)
 spam1 <- subset(spamD,spamD$targetvar==1)
 
@@ -110,6 +77,7 @@ score <- probs[,2]
 truth <- val$targetvar
 
 threshold <- 0.85
+
 Measures(truth,score,threshold)
 
 

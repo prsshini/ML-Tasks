@@ -2,7 +2,6 @@
 rm (list=ls())
 
 #set wd:
-#setwd("E:/DataScienceTeaching_2015_09_22/DataScienceClass/thresholdViz")
 
 # This is R code for http://blog.insightdatalabs.com/visualizing-classifier-thresholds/
 # Visualizing Machine Learning Thresholds to Make Better Business Decisions by Slater Stich
@@ -14,7 +13,13 @@ library(rattle)
 library(rpart.plot)
 library(RColorBrewer)
 library(caret)
-source("functions.R")
+
+# The EvalFit function Measures  Best accuracy and GetBest function measures Best CP for the rpart.
+source("Evalfit_GetBest_functions.R")
+
+# The Spam Measures.R Function measures the truth,threshold and score values.
+source("spam_measures.R")
+
 
 # Get telecom churn Data Set
 #data <- read.csv('http://www.dataminingconsultant.com/data/churn.txt')

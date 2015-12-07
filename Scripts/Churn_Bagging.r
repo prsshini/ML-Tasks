@@ -11,7 +11,13 @@ library(rpart)
 library(caret)
 library(ggplot2)
 
-source("functions_bagging.R")
+# The EvalFit function Measures  Best accuracy and GetBest function measures Best CP for the rpart.
+source("Evalfit_GetBest_functions.R")
+
+source("functions_bagging.r")
+
+# The Spam Measures.R Function measures the truth,threshold and score values.
+source("spam_measures.R")
 
 # Get telecom churn Data Set
 #data <- read.csv('http://www.dataminingconsultant.com/data/churn.txt')
@@ -55,20 +61,10 @@ for (trial in 1:ntrials){
   weights <- (train[targetvar]==targetval)*(1-2*wt) + wt
   # Do training using bagging of rpart models
   ntree <- 100
-  # bagtrain is a function I have formed - it is in functions_bagging.r file.
-  # Homework: study both the logic as well as the R code for it carefully.
+  
   bagmodels <- bagtrain(train,Formula,weights,ntree)
   prob <- bagpredict(bagmodels, test)
-  #The following lines can be used to run single rpart or randomForest
-  #rpartModel <- rpart(Formula, data = train, weights=weights)
-  #Model <- rpartModel
-  #rm(rpartModel)
-  #rfModel <- randomForest(Formula, data = train, classwt=c(1-wt,wt), mtry = 2, importance = TRUE, do.trace = 100)
-  #Model <- rfModel
-  #rm(rfModel)
-  #prob <- predict(Model,test,"prob")
-  #prob <- prob[,2]
-  #rm(Model)
+  
   truth <- (test[[targetvar]] == targetval)
   threshold <- vector(mode="numeric", length=numth+1)
   queue_rate <- vector(mode="numeric", length=numth+1)

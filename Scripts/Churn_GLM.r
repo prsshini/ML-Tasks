@@ -1,8 +1,6 @@
 # Start clean
 rm (list=ls())
 
-#set wd:
-#setwd("E:/DataScienceTeaching_2015_09_22/DataScienceClass/thresholdViz")
 
 # This is R code for http://blog.insightdatalabs.com/visualizing-classifier-thresholds/
 # Visualizing Machine Learning Thresholds to Make Better Business Decisions by Slater Stich

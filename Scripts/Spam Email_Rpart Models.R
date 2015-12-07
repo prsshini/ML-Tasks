@@ -6,7 +6,12 @@ library(rpart.plot)
 library(RColorBrewer)
 
 
-rm (list=ls())
+# The EvalFit function Measures  Best accuracy and GetBest function measures Best CP for the rpart.
+source("Evalfit_GetBest_functions.R")
+
+# The Spam Measures.R Function measures the truth,threshold and score values.
+source("spam_measures.R")
+
 spamD <- read.csv('http://archive.ics.uci.edu/ml/machine-learning-databases/spambase/spambase.data',sep=',',header=F)
 
 
